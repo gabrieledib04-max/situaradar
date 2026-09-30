@@ -1,0 +1,25 @@
+{
+  "name": "situaradar",
+  "version": "1.0.0",
+  "description": "SituaRadar - Social hotspots based on device usage patterns",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "seed": "node server/utils/mockDataGenerator.js",
+    "simulate": "node server/utils/liveSimulator.js",
+    "install-client": "cd client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
