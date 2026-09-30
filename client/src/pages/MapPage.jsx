@@ -107,13 +107,15 @@ function MapPage() {
   // Theory Note (Ch. 5 - Async Programming):
   // 'async/await' is modern JS syntax that wraps Promises, allowing us to write asynchronous
   // code that looks synchronous. It makes error handling (try/catch) much cleaner.
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+
   const reportLocation = async (lat, lng, isScreenOn) => {
     try {
       const token = localStorage.getItem('token');
       const headers = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      await fetch('/api/location', {
+      await fetch(`${apiUrl}/api/location`, {
         method: 'POST',
         headers,
         body: JSON.stringify({ lat, lng, isScreenOn })
@@ -126,7 +128,7 @@ function MapPage() {
   const fetchRadarData = async () => {
     setIsScanning(true);
     try {
-      const response = await fetch('/api/radar');
+      const response = await fetch(`${apiUrl}/api/radar`);
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
       setRadarData(data);
@@ -205,7 +207,7 @@ function MapPage() {
 
     setIsSearching(true);
     try {
-      const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+      const response = await fetch(`${apiUrl}/api/search?q=${encodeURIComponent(query)}`);
       if (!response.ok) throw new Error('Search failed');
       const data = await response.json();
       

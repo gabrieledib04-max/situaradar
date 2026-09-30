@@ -7,10 +7,12 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/auth/login', {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -31,7 +33,7 @@ function Login() {
     alert("Simulazione OAuth: Accedi con Google...");
     // Mock login for MVP
     try {
-      const response = await fetch('/auth/oauth', {
+      const response = await fetch(`${apiUrl}/auth/oauth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

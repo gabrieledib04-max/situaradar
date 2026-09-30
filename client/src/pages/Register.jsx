@@ -9,10 +9,12 @@ function Register() {
   const [age, setAge] = useState(18);
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/auth/register', {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, gender, age })
@@ -33,7 +35,7 @@ function Register() {
     alert("Simulazione OAuth: Registrazione con Google...");
     // Mock OAuth for MVP
     try {
-      const response = await fetch('/auth/oauth', {
+      const response = await fetch(`${apiUrl}/auth/oauth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
