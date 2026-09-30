@@ -13,11 +13,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/situaradar';
 
-// Middlewares
+// CORS and JSON Middlewares
 app.use(cors());
 app.use(express.json());
-// Serve static frontend files
-app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
@@ -28,9 +26,9 @@ mongoose.connect(MONGODB_URI)
 app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
 
-// Fallback to index.html for any other route
+// Fallback route for API
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+  res.json({ message: "SituaRadar Backend API is running." });
 });
 
 app.listen(PORT, () => {
