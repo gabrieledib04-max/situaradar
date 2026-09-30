@@ -107,7 +107,8 @@ function MapPage() {
   // Theory Note (Ch. 5 - Async Programming):
   // 'async/await' is modern JS syntax that wraps Promises, allowing us to write asynchronous
   // code that looks synchronous. It makes error handling (try/catch) much cleaner.
-  const apiUrl = import.meta.env.VITE_API_URL || '';
+  let apiUrl = import.meta.env.VITE_API_URL || '';
+  if (apiUrl.endsWith('/')) apiUrl = apiUrl.slice(0, -1);
 
   const reportLocation = async (lat, lng, isScreenOn) => {
     try {
